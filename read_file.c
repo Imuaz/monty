@@ -1,5 +1,4 @@
 #include "monty.h"
-
 /**
  * read_file - reads file, line by line
  * @file: the name of the file

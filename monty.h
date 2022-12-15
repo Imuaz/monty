@@ -6,8 +6,9 @@
  * Desc: Header file that containe all the fucntion prototypes and
  * type definations used in the project
  */
-
+#include <unistd.h>
 #include <stdlib.h>
+#define __USE_GNU
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/stat.h>
@@ -52,6 +53,7 @@ typedef struct instruction_s
 extern stack_t **global_head;
 
 void global_free(void);
+int isascii(int c);
 
 void read_file(char *file, stack_t **stack);
 void parse_command(stack_t **stack, char *op, unsigned int line_num);
