@@ -9,12 +9,16 @@
 
 #include <stdlib.h>
 #include <stdio.h>
-#include <unistd.h>
-#include <string.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
 #include <ctype.h>
-#include <stdarg.h>
 
-/* data structures */
+#include <stdbool.h>
+#include <string.h>
+
+#define DELIMS "\n \r\t"
+
 /**
  * struct stack_s - doubly linked list representation of a stack (or queue)
  * @n: integer
@@ -32,7 +36,7 @@ typedef struct stack_s
 } stack_t;
 
 /**
- * struct instruction_s - opcode and its function
+ * struct instruction_s - opcoode and its function
  * @opcode: the opcode
  * @f: function to handle the opcode
  *
@@ -45,13 +49,13 @@ typedef struct instruction_s
 	void (*f)(stack_t **stack, unsigned int line_number);
 } instruction_t;
 
-/*global variable*/
-extern int argument;
-int argument;
+extern stack_t **global_head;
 
-/*function prototypes*/
+void global_free(void);
 
-/*opcode functions*/
+void read_file(char *file, stack_t **stack);
+void parse_command(stack_t **stack, char *op, unsigned int line_num);
+
 void push(stack_t **stack, unsigned int line_number);
 void pall(stack_t **stack, unsigned int line_number);
 void pint(stack_t **stack, unsigned int line_number);
@@ -67,12 +71,5 @@ void pchar(stack_t **stack, unsigned int line_number);
 void pstr(stack_t **stack, unsigned int line_number);
 void rotl(stack_t **stack, unsigned int line_number);
 void rotr(stack_t **stack, unsigned int line_number);
-void (*get_opcode(char *))(stack_t **stack, unsigned int line_number);
 
-/*helper functions*/
-char **break_line(char *line);
-int toInt(char *s);
-void err(int code, ...);
-void free_dlist(stack_t *head);
-
-#endif /* MONTY_H */
+#endif /*MONTY_H*/
