@@ -6,8 +6,7 @@
  * @line_number: The current working line number of a Monty bytecodes file.
  */
 void monty_push(stack_t **stack, unsigned int line_number)
-{
-	stack_t *tmp, *new;
+{	stack_t *tmp, *new;
 	int i;
 
 	new = malloc(sizeof(stack_t));
